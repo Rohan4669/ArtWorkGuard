@@ -14,6 +14,7 @@ const schema = z.object({
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters').optional(),
   JWT_EXPIRES_IN: z.string().default('8h'),
   COOKIE_SECURE: bool.optional(),
+  COOKIE_SAMESITE: z.enum(['lax', 'strict', 'none']).default('lax'), // use 'none' when the UI and API are on different sites
   ALLOW_REGISTRATION: bool.default('true'),
   UPLOAD_DIR: z.string().default(path.join(root, 'storage/uploads')),
   REPORT_DIR: z.string().default(path.join(root, 'storage/reports')),
@@ -54,6 +55,7 @@ export function loadConfig(rawEnv = process.env) {
     c.__ephemeralSecret = true;
   }
   c.COOKIE_SECURE ??= c.NODE_ENV === 'production';
+  if (c.COOKIE_SAMESITE === 'none') c.COOKIE_SECURE = true; // browsers reject SameSite=None without Secure
   c.origins = c.FRONTEND_ORIGIN.split(',').map((s) => s.trim()).filter(Boolean);
   c.maxUploadBytes = Math.round(c.MAX_UPLOAD_MB * 1024 * 1024);
   return Object.freeze(c);

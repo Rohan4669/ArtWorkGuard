@@ -9,7 +9,7 @@ export function signToken(cfg, user) {
 }
 
 export function setAuthCookie(cfg, res, token) {
-  res.cookie(COOKIE, token, { httpOnly: true, sameSite: 'lax', secure: cfg.COOKIE_SECURE, path: '/', maxAge: 8 * 3600 * 1000 });
+  res.cookie(COOKIE, token, { httpOnly: true, sameSite: cfg.COOKIE_SAMESITE, secure: cfg.COOKIE_SECURE, path: '/', maxAge: 8 * 3600 * 1000 });
 }
 
 export const requireAuth = (cfg) => async (req, _res, next) => {

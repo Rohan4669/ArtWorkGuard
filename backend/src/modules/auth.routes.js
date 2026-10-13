@@ -38,7 +38,7 @@ export function authRoutes({ cfg, audit, authLimiter }) {
     res.json({ data: { user } });
   }));
 
-  r.post('/logout', wrap(async (_req, res) => { res.clearCookie(COOKIE, { path: '/' }); res.json({ data: { ok: true } }); }));
+  r.post('/logout', wrap(async (_req, res) => { res.clearCookie(COOKIE, { path: '/', sameSite: cfg.COOKIE_SAMESITE, secure: cfg.COOKIE_SECURE }); res.json({ data: { ok: true } }); }));
   r.get('/me', requireAuth(cfg), wrap(async (req, res) => res.json({ data: { user: req.user } })));
   return r;
 }
