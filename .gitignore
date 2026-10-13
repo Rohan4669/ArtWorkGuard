@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+# Runtime data: uploads and reports are customer documents
+backend/storage/
+storage/
+# Python
+engine/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+coverage/

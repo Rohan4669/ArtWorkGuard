@@ -1,0 +1,26 @@
+{
+  "name": "artworkguard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Packaging artwork comparison and verification platform",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "setup:engine": "node scripts/setup-engine.mjs",
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "check": "npm run lint && npm run test && npm run build && node scripts/check-licences.mjs",
+    "licences": "node scripts/check-licences.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}

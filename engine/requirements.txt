@@ -1,0 +1,5 @@
+# Visual-diff worker dependencies (all permissive; see docs/LICENCES.md for the review notes).
+# Python >= 3.10 (tested on 3.12).
+pypdfium2==5.14.0                 # BSD-3-Clause OR Apache-2.0 (PDFium: BSD-3-Clause + bundled third-party notices)
+opencv-python-headless==5.0.0.93  # Apache-2.0 (wheel bundles FFmpeg/LGPL, OpenSSL: LEGAL REVIEW - see docs/LICENCES.md)
+numpy==2.5.4                      # BSD-3-Clause (+ bundled permissive components)
